@@ -146,6 +146,21 @@
       nav { padding: 1rem 1.5rem; }
       .services, .gallery, .about, .contact { padding: 4rem 1.5rem; }
     }
+	.paint-canvas {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #FDF0E0 0%, #F2E8D9 50%, #E8F4EC 100%);
+  padding: 2rem;
+}
+.paint-canvas svg {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  filter: drop-shadow(0 20px 40px rgba(106,66,38,0.15));
+}
   </style>
 </head>
 <body>
@@ -174,7 +189,76 @@
       </div>
     </div>
     <div class="hero-right">
-      <div class="hero-emoji-grid">
+  <div class="paint-canvas">
+    <svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+      <!-- Face outline -->
+      <ellipse cx="250" cy="280" rx="160" ry="190" fill="#FDDCB5" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.2s" fill="freeze"/>
+      </ellipse>
+      <!-- Butterfly paint stroke - left -->
+      <path d="M 150 220 Q 100 180 120 150 Q 140 120 170 150 Q 185 165 175 185 Q 165 205 150 220Z" fill="#E8824A" opacity="0">
+        <animate attributeName="opacity" from="0" to="0.9" dur="0.6s" begin="1s" fill="freeze"/>
+        <animateTransform attributeName="transform" type="scale" from="0.5 0.5" to="1 1" dur="0.6s" begin="1s" fill="freeze" additive="sum"/>
+      </path>
+      <!-- Butterfly paint stroke - right -->
+      <path d="M 350 220 Q 400 180 380 150 Q 360 120 330 150 Q 315 165 325 185 Q 335 205 350 220Z" fill="#E8824A" opacity="0">
+        <animate attributeName="opacity" from="0" to="0.9" dur="0.6s" begin="1.3s" fill="freeze"/>
+      </path>
+      <!-- Star on forehead -->
+      <polygon points="250,140 258,162 282,162 263,176 270,198 250,185 230,198 237,176 218,162 242,162" fill="#FFD93D" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.8s" fill="freeze"/>
+        <animateTransform attributeName="transform" type="rotate" from="0 250 170" to="360 250 170" dur="0.8s" begin="1.8s" fill="freeze"/>
+      </polygon>
+      <!-- Flower cheek left -->
+      <circle cx="150" cy="320" r="25" fill="#FF6B9D" opacity="0">
+        <animate attributeName="opacity" from="0" to="0.7" dur="0.5s" begin="2s" fill="freeze"/>
+        <animate attributeName="r" from="0" to="25" dur="0.5s" begin="2s" fill="freeze"/>
+      </circle>
+      <circle cx="150" cy="320" r="10" fill="#FFD93D" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2.3s" fill="freeze"/>
+      </circle>
+      <!-- Flower cheek right -->
+      <circle cx="350" cy="320" r="25" fill="#FF6B9D" opacity="0">
+        <animate attributeName="opacity" from="0" to="0.7" dur="0.5s" begin="2.2s" fill="freeze"/>
+        <animate attributeName="r" from="0" to="25" dur="0.5s" begin="2.2s" fill="freeze"/>
+      </circle>
+      <circle cx="350" cy="320" r="10" fill="#FFD93D" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2.5s" fill="freeze"/>
+      </circle>
+      <!-- Paint swirl around face -->
+      <path d="M 100 200 Q 50 280 90 360 Q 130 440 250 460 Q 370 440 410 360 Q 450 280 400 200" stroke="#4A7C59" stroke-width="4" fill="none" stroke-dasharray="800" stroke-dashoffset="800" opacity="0.6">
+        <animate attributeName="stroke-dashoffset" from="800" to="0" dur="2s" begin="0.5s" fill="freeze"/>
+      </path>
+      <!-- Paint drops -->
+      <circle cx="180" cy="450" r="8" fill="#E8824A" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2.8s" fill="freeze"/>
+        <animate attributeName="cy" from="420" to="450" dur="0.3s" begin="2.8s" fill="freeze"/>
+      </circle>
+      <circle cx="320" cy="470" r="6" fill="#FF6B9D" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3s" fill="freeze"/>
+        <animate attributeName="cy" from="440" to="470" dur="0.3s" begin="3s" fill="freeze"/>
+      </circle>
+      <circle cx="250" cy="490" r="10" fill="#4A7C59" opacity="0">
+        <animate attributeName="opacity" from="0" to="0.8" dur="0.3s" begin="3.2s" fill="freeze"/>
+        <animate attributeName="cy" from="460" to="490" dur="0.3s" begin="3.2s" fill="freeze"/>
+      </circle>
+      <!-- Brush stroke top -->
+      <path d="M 160 80 Q 250 40 340 80" stroke="#E8824A" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200">
+        <animate attributeName="stroke-dashoffset" from="200" to="0" dur="0.8s" begin="0.1s" fill="freeze"/>
+      </path>
+      <!-- Sparkles -->
+      <text x="420" y="150" font-size="24" opacity="0">✨
+        <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.5s" fill="freeze"/>
+      </text>
+      <text x="60" y="400" font-size="20" opacity="0">🎨
+        <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.7s" fill="freeze"/>
+      </text>
+      <text x="430" y="380" font-size="18" opacity="0">⭐
+        <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="3.9s" fill="freeze"/>
+      </text>
+    </svg>
+  </div>
+</div>
         <span>🦋</span><span>🌸</span><span>🦁</span>
         <span>⭐</span><span>🐱</span><span>🌈</span>
       </div>
