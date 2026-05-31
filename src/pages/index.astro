@@ -1,0 +1,307 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mary's Face Art | Vancouver · Langley · Surrey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --cream: #FDF6EC;
+      --warm: #F2E8D9;
+      --orange: #E8824A;
+      --orange-light: #F4A96A;
+      --green: #4A7C59;
+      --brown: #6B4226;
+      --text: #3A2A1A;
+      --text-light: #7A6A5A;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+    /* CURSOR */
+    body { cursor: none; }
+    .cursor { width: 20px; height: 20px; border: 2px solid var(--orange); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.1s; }
+    .cursor-dot { width: 5px; height: 5px; background: var(--orange); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 4rem; background: rgba(253,246,236,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(232,130,74,0.1); }
+    .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--brown); }
+    .logo span { color: var(--orange); font-style: italic; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-light); transition: color 0.3s; }
+    .nav-links a:hover { color: var(--orange); }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 55% 45%; }
+    .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 4rem 5rem; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--green); color: white; padding: 0.45rem 1.1rem; border-radius: 50px; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.8rem; width: fit-content; animation: fadeUp 0.8s ease both; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 4.5vw, 4.5rem); line-height: 1.08; color: var(--brown); margin-bottom: 1.5rem; animation: fadeUp 0.8s 0.1s ease both; }
+    .hero h1 em { font-style: italic; color: var(--orange); }
+    .hero-desc { font-size: 1.05rem; color: var(--text-light); line-height: 1.85; max-width: 400px; margin-bottom: 2.5rem; animation: fadeUp 0.8s 0.2s ease both; }
+    .hero-btns { display: flex; gap: 1rem; animation: fadeUp 0.8s 0.3s ease both; }
+    .btn-primary { background: var(--orange); color: white; padding: 1rem 2.2rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; box-shadow: 0 8px 25px rgba(232,130,74,0.4); transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 35px rgba(232,130,74,0.5); }
+    .btn-secondary { border: 2px solid var(--green); color: var(--green); padding: 1rem 2.2rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; transition: all 0.2s; }
+    .btn-secondary:hover { background: var(--green); color: white; }
+
+    .hero-right { position: relative; overflow: hidden; background: linear-gradient(160deg, #F4A96A 0%, #E8824A 50%, #4A7C59 100%); }
+    .hero-right::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px); background-size: 28px 28px; z-index: 1; }
+    .hero-emoji-grid { position: absolute; inset: 0; z-index: 2; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 2rem; padding: 6rem 3rem 3rem; }
+    .hero-emoji-grid span { font-size: 4rem; animation: float 4s ease-in-out infinite; display: block; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2)); }
+    .hero-emoji-grid span:nth-child(2) { animation-delay: 0.6s; }
+    .hero-emoji-grid span:nth-child(3) { animation-delay: 1.2s; }
+    .hero-emoji-grid span:nth-child(4) { animation-delay: 1.8s; }
+    .hero-emoji-grid span:nth-child(5) { animation-delay: 2.4s; }
+    .hero-emoji-grid span:nth-child(6) { animation-delay: 3s; }
+
+    /* MARQUEE */
+    .marquee-wrap { background: var(--brown); padding: 1rem 0; overflow: hidden; }
+    .marquee-inner { display: inline-block; animation: marquee 25s linear infinite; white-space: nowrap; }
+    .marquee-inner span { color: rgba(253,246,236,0.85); font-weight: 700; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; padding: 0 2rem; }
+    .marquee-inner span::before { content: '✦'; margin-right: 2rem; color: var(--orange-light); }
+
+    /* SECTIONS */
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 0.7rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); color: var(--brown); line-height: 1.2; }
+
+    /* SERVICES */
+    .services { padding: 7rem 5rem; background: var(--cream); }
+    .services .section-title { margin-bottom: 3.5rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+    .service-card { background: var(--warm); border-radius: 22px; padding: 2.5rem 1.8rem; border: 1px solid rgba(232,130,74,0.12); transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
+    .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--green)); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+    .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(106,66,38,0.12); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-icon { font-size: 2.8rem; margin-bottom: 1.2rem; }
+    .service-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--brown); margin-bottom: 0.7rem; }
+    .service-card p { font-size: 0.88rem; color: var(--text-light); line-height: 1.75; }
+
+    /* GALLERY */
+    .gallery { padding: 7rem 5rem; background: var(--warm); }
+    .gallery .section-title { margin-bottom: 3rem; }
+    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 260px 260px; gap: 1rem; }
+    .gallery-item { border-radius: 18px; overflow: hidden; position: relative; }
+    .gallery-item:first-child { grid-row: 1 / 3; }
+    .gallery-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 5rem; transition: transform 0.5s; }
+    .gallery-item:hover .gallery-inner { transform: scale(1.07); }
+    .g1 { background: linear-gradient(135deg, #F4A96A, #C85A2A); }
+    .g2 { background: linear-gradient(135deg, #7BAE8B, #2E5E40); }
+    .g3 { background: linear-gradient(135deg, #EDD5B0, #C49060); }
+    .g4 { background: linear-gradient(135deg, #F2BFA0, #D06030); }
+    .g5 { background: linear-gradient(135deg, #A8C5B5, #3A6E50); }
+    .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(58,42,26,0.75), transparent); opacity: 0; transition: opacity 0.3s; display: flex; align-items: flex-end; padding: 1.5rem; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay span { color: white; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; }
+
+    /* ABOUT */
+    .about { padding: 7rem 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; background: var(--cream); }
+    .about-visual { position: relative; }
+    .about-img-wrap { border-radius: 30px; overflow: hidden; height: 500px; box-shadow: 0 30px 80px rgba(106,66,38,0.2); }
+    .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .about-badge { position: absolute; bottom: -20px; right: -20px; background: var(--green); color: white; border-radius: 20px; padding: 1.2rem 1.5rem; text-align: center; box-shadow: 0 10px 30px rgba(74,124,89,0.4); }
+    .about-badge strong { display: block; font-size: 2rem; font-family: 'Playfair Display', serif; }
+    .about-badge span { font-size: 0.72rem; letter-spacing: 1px; opacity: 0.9; }
+    .about-content .section-title { margin-bottom: 1.5rem; margin-top: 0.5rem; }
+    .about-content p { color: var(--text-light); line-height: 1.9; font-size: 1rem; margin-bottom: 1.5rem; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+    .tag { background: var(--warm); color: var(--brown); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(232,130,74,0.2); }
+
+    /* CONTACT */
+    .contact { padding: 7rem 5rem; background: var(--brown); position: relative; overflow: hidden; }
+    .contact::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 35px 35px; }
+    .contact-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .contact .section-label { color: var(--orange-light); }
+    .contact .section-title { color: var(--cream); margin-bottom: 2rem; margin-top: 0.5rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; color: rgba(253,246,236,0.85); }
+    .contact-item-icon { width: 46px; height: 46px; background: rgba(255,255,255,0.1); border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .areas { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .area-tag { background: rgba(255,255,255,0.1); color: rgba(253,246,236,0.9); padding: 0.4rem 0.9rem; border-radius: 50px; font-size: 0.8rem; font-weight: 700; }
+    .contact-card { background: rgba(255,255,255,0.07); border-radius: 24px; padding: 3rem; border: 1px solid rgba(255,255,255,0.1); }
+    .contact-card p { color: rgba(253,246,236,0.8); font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem; font-family: 'Playfair Display', serif; font-style: italic; }
+
+    /* FOOTER */
+    footer { background: #1A0E06; color: rgba(253,246,236,0.35); text-align: center; padding: 2rem; font-size: 0.85rem; }
+    footer strong { color: var(--orange-light); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(25px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-18px); } }
+    @keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+    .reveal { opacity:0; transform:translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { height: 320px; }
+      .hero-left { padding: 7rem 2rem 3rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item:first-child { grid-row: auto; }
+      .about, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      nav { padding: 1rem 1.5rem; }
+      .services, .gallery, .about, .contact { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <nav>
+    <div class="logo">Mary's <span>Face Art</span></div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">✦ Serving Metro Vancouver</div>
+      <h1>Where Art Meets<br><em>Little Faces</em></h1>
+      <p class="hero-desc">Professional face painting that transforms children and adults into magical creatures, superheroes, and works of art — for every special occasion.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Book Your Event 🎉</a>
+        <a href="#gallery" class="btn-secondary">See My Work</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-emoji-grid">
+        <span>🦋</span><span>🌸</span><span>🦁</span>
+        <span>⭐</span><span>🐱</span><span>🌈</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-wrap">
+    <div class="marquee-inner">
+      <span>Birthday Parties</span><span>Festivals</span><span>School Events</span>
+      <span>Weddings</span><span>Corporate Events</span><span>Baby Showers</span>
+      <span>Birthday Parties</span><span>Festivals</span><span>School Events</span>
+      <span>Weddings</span><span>Corporate Events</span><span>Baby Showers</span>
+    </div>
+  </div>
+
+  <section class="services" id="services">
+    <div class="section-label">What I offer</div>
+    <h2 class="section-title">Services for Every<br>Special Occasion</h2>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">🎂</div>
+        <h3>Birthday Parties</h3>
+        <p>Make your child's birthday truly magical with professional face art everyone will remember.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🎪</div>
+        <h3>Festivals & Fairs</h3>
+        <p>High-volume face painting for community events, fairs, and large gatherings.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🏫</div>
+        <h3>School Events</h3>
+        <p>Safe, fun face painting for school fairs, fundraisers, and end-of-year celebrations.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">💍</div>
+        <h3>Special Occasions</h3>
+        <p>Weddings, baby showers, corporate events, and any private celebration.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <div class="section-label">Portfolio</div>
+    <h2 class="section-title">A Glimpse of My Work</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal"><div class="gallery-inner g1">🦋</div><div class="gallery-overlay"><span>Butterfly Fantasy</span></div></div>
+      <div class="gallery-item reveal"><div class="gallery-inner g2">🦁</div><div class="gallery-overlay"><span>Lion King</span></div></div>
+      <div class="gallery-item reveal"><div class="gallery-inner g3">🌸</div><div class="gallery-overlay"><span>Spring Blossom</span></div></div>
+      <div class="gallery-item reveal"><div class="gallery-inner g4">🐉</div><div class="gallery-overlay"><span>Dragon Fire</span></div></div>
+      <div class="gallery-item reveal"><div class="gallery-inner g5">⭐</div><div class="gallery-overlay"><span>Starlight</span></div></div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-visual reveal">
+      <div class="about-img-wrap">
+        <img src="/mary.jpg" alt="Mary - Face Artist" />
+      </div>
+      <div class="about-badge">
+        <strong>5+</strong>
+        <span>Years Experience</span>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="section-label">About the artist</div>
+      <h2 class="section-title">Hi, I'm Mary —<br><em style="color:var(--orange);font-style:italic;">Your Local Face Artist</em></h2>
+      <p>I'm a passionate face painter based in Metro Vancouver with a love for bringing smiles and wonder to people of all ages. Every face is a canvas and every event is a chance to create something truly magical.</p>
+      <p>I use only professional-grade, hypoallergenic, skin-safe paints — completely safe for kids and adults alike.</p>
+      <div class="about-tags">
+        <span class="tag">✓ Skin-safe paints</span>
+        <span class="tag">✓ All ages welcome</span>
+        <span class="tag">✓ Fully insured</span>
+        <span class="tag">✓ Fast & friendly</span>
+      </div>
+      <a href="#contact" class="btn-primary">Let's Work Together ✨</a>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div>
+        <div class="section-label">Get in touch</div>
+        <h2 class="section-title">Ready to Make<br>Magic Happen?</h2>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">📱</div>
+            <span>+1 (778) 238-7507</span>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📸</div>
+            <span>@marys.faceart</span>
+          </div>
+        </div>
+        <div class="areas">
+          <span class="area-tag">📍 Metro Vancouver</span>
+          <span class="area-tag">📍 Langley</span>
+          <span class="area-tag">📍 Surrey</span>
+        </div>
+      </div>
+      <div class="contact-card reveal">
+        <p>"Every face tells a story — let me help yours shine at your next event!"</p>
+        <a href="tel:+17782387507" class="btn-primary">Call to Book 📞</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 <strong>Mary's Face Art</strong> · Metro Vancouver · Langley · Surrey, BC · Made with ❤️</p>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    const dot = document.getElementById('cursorDot');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      dot.style.left = e.clientX + 'px';
+      dot.style.top = e.clientY + 'px';
+    });
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 120);
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
